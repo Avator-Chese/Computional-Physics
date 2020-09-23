@@ -4,8 +4,8 @@ from random import randint, random
 #==============================================================
 
 N=20
-steps = 100
-N_T=100
+steps = 200
+N_T=500
 
 def initial_state(start='Low'):
     if start=='High':
@@ -66,33 +66,42 @@ def get_lattice_plot(spin_data):
     plt.show()
 
 
-T=np.linspace(0.01,5,N_T)
-E,M,C,X = np.zeros(N_T), np.zeros(N_T), np.zeros(N_T), np.zeros(N_T) 
-n_1, n_2 = (1.0)/(steps*N), (1.0)/(steps*steps*N)
+# T=np.linspace(0.01,5,N_T)
+# E,M,C,X = np.zeros(N_T), np.zeros(N_T), np.zeros(N_T), np.zeros(N_T) 
+# n_1, n_2 = (1.0)/(steps*N), (1.0)/(steps*steps*N)
 
-for i in range(N_T):
-    E_1 = M_1 = E_2 = M_2 = 0
-    con = initial_state('Low')
-    i_T = 1.0 / T[i]
-    i_T_2 = i_T * i_T
+# for i in range(N_T):
+#     E_tol = M_tol = E_tol_2 = M_tol_2 = 0
+#     con = initial_state('Low')
+#     T_i = 1.0 / T[i]
+#     T_i2 = T_i * T_i
 
-    for j in range(steps): 
-        con_update(con, i_T, 1)
-        Energy = cal_tol_energy(con, 1) 
-        Magnet= cal_tol_magnetization(con) 
+#     for j in range(steps): 
+#         con_update(con, T_i, 1)
+#         en = cal_tol_energy(con, 1) 
+#         ma= cal_tol_magnetization(con) 
 
-        M_1 = M_1 + Magnet
-        E_1 = E_1 + Energy
-        M_2 = M_2 + Magnet*Magnet
-        E_2 = E_2 + Energy*Energy
+#         M_tol = M_tol + ma
+#         E_tol = E_tol + en
+#         M_tol_2 = M_tol_2 + ma**2
+#         E_tol_2 = E_tol_2 + en**2
 
-    E[i] = n_1*E_1 #Energy
-    M[i] = n_1*M_1 #Magnetization
-    C[i] = (n_1*E_2 - n_2*E_1*E_1)*i_T_2 #Specific Heat
-    X[i] = (n_1*M_2 - n_2*M_1*M_1)*i_T #Susceptibility
+#     E[i] = n_1*E_tol #Energy
+#     M[i] = n_1*M_tol #Magnetization
+#     C[i] = (n_1*E_tol_2 - n_2*E_tol*E_tol)*T_i2 #Specific Heat
+#     X[i] = (n_1*M_tol_2 - n_2*M_tol*M_tol)*T_i #Susceptibility
 
 
     
-plt.plot(T, X)
-plt.show()
+# plt.scatter(T, M,s=50, marker = 'o', color = 'r')
+# plt.show()
 
+T_ch = 5
+M_single_spin = []
+con = initial_state('High')
+for i in range(steps):
+    M_single_spin.append(cal_tol_magnetization(con) / N)
+    con_update(con, 1 / T_ch, 1)
+
+plt.plot(np.arange(steps), M_single_spin)
+plt.show()
