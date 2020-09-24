@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage{indentfirst}
+\usepackage{braket}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{ulem}
+\usepackage{framed}
+\usepackage{empheq}
+\usepackage{mathtools}
+\usepackage[linkcolor=blue,colorlinks=true,linktoc=all]{hyperref}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+
+% \graphicspath{{Diagrams/}}
+\geometry{a4paper,scale=0.85}
+\title{\Large{\textbf{Report for 1D Ising Model\\}}}
+\author{\textbf{Roni Bartsch}\\
+	Bar-Ilan University\\Guo Liangliang}
+\date{}
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		This report talks the simulation of 1D ising model which there is no external magnetic field ($B=0$) with metropolis algorithm. Behaviours of both ferromagnets ($J=1$) and antiferromagnets ($J=-1$) are studied using the simulated data. What the report mainly considered is how  average magnetization, average energy and specific heat behave with temperature changes. Besides, the dynamics of the system and how it reaches equilibrium are also discussed. The code for the simulation is written with Python and be attached in another file.
+	\end{abstract}
+	
+	\section{Introduction}
+	\label{sec: introduction}
+	
+	\subsection{Ising Model}
+	\label{sec: ising model}
+	In statistical mechanics, ising model is used to describe magnetic systems. It consists of a lattice with a discrete value $\sigma _i  \in \{-1,1\}$ assigned to each point, which represents the spin at the lattice site ($\sigma_i=-1$ means spin down, $\sigma_i=1$ means spin up). The Hamiltonian of the system can be given by 
+	\begin{align}\label{equ: hamiltonian of ising model}
+		H=-\sum_{i,j}J_{i,j}\sigma_i \sigma _j -h \sum_i \sigma_i
+	\end{align}
+	
+	where the first sum is over the interacting spin pairs and the second sum is over the entire lattice. $J_{i,j}$ is the exchange term between the spins and $h$ represents the energy term between the spins and external magnetic field. When $J_{i,j}>0$, the neighbouring spins will tend to arrange to the same direction and the corresponding property is ferromagnetism. If $j_{i,j}$ is negative, the close spins will ten to have oppose directions, the property is antiferromagnetism.  Ferromagnetism occurs in some magnetic materials below the Curie Temperature $T_C$. Spins in microscopic regions (domains) are aligned. The magnetic field is strong in the domain, but the domains in the material are randomly ordered with respect to one another, the material is usually unmagentised. In the presence of an external magnetic field, the domains will line up with each other which will cause the material to become magnetised.  If the applied field is removed, the domains remain aligned, meaning ferromagnetic materials can exhibit spontaneous magnetisation (remanence): a net magnetic moment in the absence of an external magnetic field. Above the Curie temperature, the thermal motion is sufficient to disrupt the alignment, and the material becomes paramagnetic. 
+	
+	In this report, we only consider 1D ising model which assumes there is only interactions between nearest neighbour spins, the exchange term is a constant value for all neighbouring pairs of spins $J_{i,j}=J$ (Ferromagnets: $J=1$; Antiferromagnets: $J=-1$) and there is no external magnetic field ($h=0$). So we can get a more simple expression of Hamiltonian compare with equation \ref{equ: hamiltonian of ising model}.
+	\begin{align}
+		H=-J\sum_{i=0}^{N-1} \sigma_i \sigma_{i+1}
+	\end{align}
+	
+	\subsection{Thermodynamic Variables}
+	\label{sec； thermodynamic variables}
+	To research the properties of the system,we need to calculate several thermodynamic variables and investigate them. In particular, how they depend on the temperature of the system. The average energy per spin is
+	\begin{align}\label{equ: average energy per spin}
+		\braket{E}=\frac{1}{2}\braket{H}=\frac{1}{2}\frac{-J \sum_{i=0}^{N-1} \sigma_i \sigma_{i+1}}{N}
+	\end{align}
+	
+	For 1D lattice, the expect value of $\braket{E}$ is $-J$ when the spins are all aligned.
+	
+	The average magnetism per spin is 
+	\begin{align}\label{equ: average magnetization per spin}
+		\braket{M}=\frac{1}{N}\sum_{i=0}^{N-1} \sigma_i
+	\end{align}
+	
+	The specific heat capacity $C_V$ is 
+	\begin{align}\label{equ: spefic heat capacity}
+		C_V=\frac{\partial \braket{E}}{\partial T}=-\frac{\beta}{T} \frac{\partial \braket{E}}{\partial \beta}=\frac{\beta}{T}\frac{\partial ^2 \ln(Z)}{\partial \beta ^2}=\frac{\beta}{T}\big(\braket{E^2}-\braket{E}^2\big)
+	\end{align}
+	
+	The magnetic susceptibility is 
+	\begin{align}
+		\chi=\frac{\partial \braket{M}}{\partial H}=\beta \big(\braket{M^2}-\braket{M}^2 \big)
+	\end{align}
+	
+	\subsection{Phase Transition}
+	\label{sec: phase transition}
+	
+\end{document}

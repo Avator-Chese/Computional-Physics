@@ -4,8 +4,8 @@ from random import randint, random
 #==============================================================
 
 N=20
-steps = 200
-N_T=500
+steps = 100
+N_T=100
 
 def initial_state(start='Low'):
     if start=='High':
@@ -65,8 +65,11 @@ def get_lattice_plot(spin_data):
     plt.scatter(X,Y,c=colors,s=13,marker='.')
     plt.show()
 
+con = initial_state('Low')
+data1 = collect_spin_data(con, 1, 1)
+get_lattice_plot(data1)
 
-# T=np.linspace(0.01,5,N_T)
+# T=np.linspace(0.01,20,N_T)
 # E,M,C,X = np.zeros(N_T), np.zeros(N_T), np.zeros(N_T), np.zeros(N_T) 
 # n_1, n_2 = (1.0)/(steps*N), (1.0)/(steps*steps*N)
 
@@ -96,12 +99,12 @@ def get_lattice_plot(spin_data):
 # plt.scatter(T, M,s=50, marker = 'o', color = 'r')
 # plt.show()
 
-T_ch = 5
-M_single_spin = []
-con = initial_state('High')
-for i in range(steps):
-    M_single_spin.append(cal_tol_magnetization(con) / N)
-    con_update(con, 1 / T_ch, 1)
+# T_ch = 5
+# M_single_spin = []
+# con = initial_state('Low')
+# for i in range(steps):
+#     M_single_spin.append(cal_tol_magnetization(con) / N)
+#     con_update(con, 1 / T_ch, 1)
 
-plt.plot(np.arange(steps), M_single_spin)
-plt.show()
+# plt.plot(np.arange(steps), M_single_spin)
+# plt.show()
