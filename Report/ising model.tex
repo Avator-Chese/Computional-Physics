@@ -33,7 +33,7 @@
 	\end{abstract}
 	
 	\section{Introduction}
-	\label{sec: introduction}
+	\label{sec: introduction} 
 	
 	\subsection{Ising Model}
 	\label{sec: ising model}
@@ -51,6 +51,8 @@
 	
 	\subsection{Thermodynamic Variables}
 	\label{sec； thermodynamic variables}
+	\subsubsection{Calculating Variables}
+	\label{subsubsec: calculateing variables}
 	To research the properties of the system,we need to calculate several thermodynamic variables and investigate them. In particular, how they depend on the temperature of the system. The average energy per spin is
 	\begin{align}\label{equ: average energy per spin}
 		\braket{E}=\frac{1}{2}\braket{H}=\frac{1}{2}\frac{-J \sum_{i=0}^{N-1} \sigma_i \sigma_{i+1}}{N}
@@ -69,11 +71,28 @@
 	\end{align}
 	
 	The magnetic susceptibility is 
-	\begin{align}
+	\begin{align}\label{equ: susceptibility}
 		\chi=\frac{\partial \braket{M}}{\partial H}=\beta \big(\braket{M^2}-\braket{M}^2 \big)
+	\end{align}
+	
+	\subsubsection{Relationship between Variables and Temperature}
+	\label{subsubsec: relationship between variables and temperature}
+	
+	For 1D ising model, there is exact solution which can be found at Wikipedia(\url{https://en.wikipedia.org/wiki/Ising_model#One_dimension}). From that, we can get the analytic function of the thermodynamic variables against temperature, which are 
+	\begin{align}\label{equ: analytic solution of variables}
+		\nonumber \braket{E(T,B)}&=-J \tanh{\frac{J}{T}}\\
+		\nonumber \braket{M(T,B)}&=\frac{\sinh^2{\frac{B}{T}}}{\sqrt{\sinh^2{(B/T)}+e^{-4J/T}}}\\
+		\nonumber \braket{\chi(T,B)}&=\frac{e^{-4J/T} \cosh{(B/T)}}{T (\sinh^2{(B/T)}+e^{-4J/T})^\frac{3}{2}}\\
+		\nonumber C_V(T,B)&=\frac{J^2 \text{sech}^2{(J/T)}}{T^2}
 	\end{align}
 	
 	\subsection{Phase Transition}
 	\label{sec: phase transition}
+	There is no phase transition for 1D ising model with nearest neighbour interactions. Let's consider a 1D lattice with N sites, when all sites align at the same direction, the energy is minimised. Assume that a boundary separates a region of "UP" sites from "Down" sites and the energy needed is $\epsilon$. When there are n such boundaries, the energy will be $E=n \epsilon$ and entropy will be $S=k_B n \ln(n/N-1)$, so we can get 
+	\begin{align}
+		F=n\epsilon - nk_B T \ln(\frac{n}{N}-1)
+	\end{align}
+	
+	It's easy to know $F$ is minimised when $n \to L$, which means the system tends to add more and more regions. For 1D ising model, it means there will not be only one region when it's equilibrium, or it  will not have phase transition. To be noted, when $T \to 0$, this argument don't work. 
 	
 \end{document}
