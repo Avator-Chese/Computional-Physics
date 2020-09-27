@@ -71,9 +71,9 @@ def get_lattice_plot(spin_data):
     plt.title('Configuration vs Steps')
     # plt.show()
 
-# con = initial_state('High')
-# data1 = collect_spin_data(con,1/1, J)
-# get_lattice_plot(data1)
+con = initial_state('High')
+data1 = collect_spin_data(con,1/1, J)
+get_lattice_plot(data1)
 
 T_ch = 1
 M_single_spin = []
@@ -90,63 +90,63 @@ plt.grid(linestyle='-.')
 plt.title(' Average Magnetization every Time Step')
 
 
-# E,M,C,X = np.zeros(N_T), np.zeros(N_T), np.zeros(N_T), np.zeros(N_T) 
-# n_1, n_2 = (1.0)/(steps*N), (1.0)/(steps*steps*N)
+E,M,C,X = np.zeros(N_T), np.zeros(N_T), np.zeros(N_T), np.zeros(N_T) 
+n_1, n_2 = (1.0)/(steps*N), (1.0)/(steps*steps*N)
 
-# for i in range(N_T):
-#     E_tol = M_tol = E_tol_2 = M_tol_2 = 0
-#     con = initial_state('High')
-#     T_i = 1.0 / T[i]
-#     T_i2 = T_i * T_i
+for i in range(N_T):
+    E_tol = M_tol = E_tol_2 = M_tol_2 = 0
+    con = initial_state('High')
+    T_i = 1.0 / T[i]
+    T_i2 = T_i * T_i
 
-#     for j in range(steps): 
-#         con_update(con, T_i, J)
-#         en = cal_tol_energy(con, J) 
-#         ma= cal_tol_magnetization(con) 
+    for j in range(steps): 
+        con_update(con, T_i, J)
+        en = cal_tol_energy(con, J) 
+        ma= cal_tol_magnetization(con) 
 
-#         M_tol = M_tol + ma
-#         E_tol = E_tol + en
-#         M_tol_2 = M_tol_2 + ma**2
-#         E_tol_2 = E_tol_2 + en**2
+        M_tol = M_tol + ma
+        E_tol = E_tol + en
+        M_tol_2 = M_tol_2 + ma**2
+        E_tol_2 = E_tol_2 + en**2
 
-#     E[i] = n_1*E_tol #Energy
-#     M[i] = n_1*M_tol #Magnetization
-#     C[i] = (n_1*E_tol_2 - n_2*E_tol*E_tol)*T_i2 #Specific Heat
-#     X[i] = (n_1*M_tol_2 - n_2*M_tol*M_tol)*T_i #Susceptibility
-
-
-# plt.figure()
-# plt.plot(T,E,'r')
-# plt.scatter(T, E, s=50, marker = '*', color = 'g') 
-# plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
-# plt.ylabel(" Average Energy per Spin($J$)", fontsize=15)
-# plt.title('Average Energy vs Temperature')
-# plt.grid(linestyle='-.')
-
-# plt.figure()
-# plt.plot(T,M,'r')
-# plt.scatter(T, M, s=50, marker = '*', color = 'g') 
-# plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
-# plt.ylabel(" Average Magnetization per Spin", fontsize=15)
-# plt.title('Average Magnetization vs Temperature')
-# plt.grid(linestyle='-.')
+    E[i] = n_1*E_tol #Energy
+    M[i] = n_1*M_tol #Magnetization
+    C[i] = (n_1*E_tol_2 - n_2*E_tol*E_tol)*T_i2 #Specific Heat
+    X[i] = (n_1*M_tol_2 - n_2*M_tol*M_tol)*T_i #Susceptibility
 
 
-# plt.figure()
-# plt.scatter(T, C, s=50, marker = '*', color = 'g')
-# plt.plot(T, C,'r') 
-# plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
-# plt.ylabel(" Specific Heat ", fontsize=15)
-# plt.title('Specific Heat vs Temperature')
-# plt.grid(linestyle='-.')
+plt.figure()
+plt.plot(T,E,'r')
+plt.scatter(T, E, s=50, marker = '*', color = 'g') 
+plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
+plt.ylabel(" Average Energy per Spin($J$)", fontsize=15)
+plt.title('Average Energy vs Temperature')
+plt.grid(linestyle='-.')
 
-# plt.figure()
-# plt.plot(T,X,'r')
-# plt.scatter(T, X, s=50, marker = '*', color = 'g') 
-# plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
-# plt.ylabel(" Magnetic Susceptibility", fontsize=15)
-# plt.title('Magnetic Susceptibility vs Temperature')
-# plt.grid(linestyle='-.')
+plt.figure()
+plt.plot(T,M,'r')
+plt.scatter(T, M, s=50, marker = '*', color = 'g') 
+plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
+plt.ylabel(" Average Magnetization per Spin", fontsize=15)
+plt.title('Average Magnetization vs Temperature')
+plt.grid(linestyle='-.')
+
+
+plt.figure()
+plt.scatter(T, C, s=50, marker = '*', color = 'g')
+plt.plot(T, C,'r') 
+plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
+plt.ylabel(" Specific Heat ", fontsize=15)
+plt.title('Specific Heat vs Temperature')
+plt.grid(linestyle='-.')
+
+plt.figure()
+plt.plot(T,X,'r')
+plt.scatter(T, X, s=50, marker = '*', color = 'g') 
+plt.xlabel("Temperature ($J/k_B$)", fontsize = 15)
+plt.ylabel(" Magnetic Susceptibility", fontsize=15)
+plt.title('Magnetic Susceptibility vs Temperature')
+plt.grid(linestyle='-.')
 
 
 plt.show()
